@@ -1,0 +1,48 @@
+# =========================
+# LOCAL MODE (single laptop)
+# =========================
+cd /home/deeptanshukumar/Downloads/files
+bash generate_certs.sh
+python server.py
+
+# Open dashboard
+http://127.0.0.1:8088   
+
+# New terminal: subscriber
+cd /home/deeptanshukumar/Downloads/files
+python subscriber.py
+
+# New terminal: publisher
+cd /home/deeptanshukumar/Downloads/files
+python publisher.py
+
+# =========================
+# LAN MODE (3 laptops)
+# =========================
+# Laptop A (server)
+cd /home/deeptanshukumar/Downloads/files
+python server.py --host 0.0.0.0 --port 9999 --dashboard-host 0.0.0.0 --dashboard-port 8088
+
+# Laptop B (subscriber)
+python subscriber.py --host <SERVER_LAN_IP> --port 9999
+
+# Laptop C (publisher)
+python publisher.py --host <SERVER_LAN_IP> --port 9999
+# one-shot publish example
+python publisher.py --host <SERVER_LAN_IP> --port 9999 cn-lab "hello from laptop C"
+
+# Open dashboard from any laptop
+http://<SERVER_LAN_IP>:8088
+
+# =========================
+# RUBRIC BENCHMARK (S1/S2/S3)
+# =========================
+cd /home/deeptanshukumar/Downloads/files
+python scripts/load_harness.py --run-standard-scenarios --output results/rubric_benchmark.csv --markdown docs/performance.md
+
+
+
+# use when a diff server running on the required port (port of your choice), kill it
+pkill -f "python server.py"
+cd /home/deeptanshukumar/Downloads/files
+python server.py

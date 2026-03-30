@@ -1,0 +1,14 @@
+# Pub-Sub System Requirements
+# All packages below are part of Python's standard library — no pip install needed!
+#
+# socket   - TCP networking
+# ssl      - TLS/SSL wrapping
+# threading - concurrent client handling
+# logging  - server log output
+# collections (deque) - message history ring buffer
+# datetime - message timestamps
+#
+# Python >= 3.8 required (for ssl.TLSVersion.TLSv1_2)
+# Tested on Python 3.10, 3.11, 3.13
+
+# No third-party dependencies.
